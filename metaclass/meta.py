@@ -61,3 +61,14 @@ class BaseDataclass(BaseModel, metaclass=DataclassMeta):
         if self._aggregation_statement is None:
             raise NotImplementedError(
                 "Please set _aggregation_statement or implement calculate(...) method in your child classes!")
+
+
+if __name__ == '__main__':
+    mnms = get_class_mnemonics()
+    print(mnms)
+    clz = get_class(mnms[0])
+    print(clz)
+    e = clz(field='fld')
+
+    from devtools import debug
+    debug(e)
