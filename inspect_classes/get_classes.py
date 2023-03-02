@@ -25,7 +25,7 @@ def get_module_classes(path: str, parent_clz_name: str | None = None):
 
             all_classes = {name: clz for name, clz in inspect.getmembers(module, inspect.isclass)}
             # pass imported classes
-            module_classes = {name: clz for name, clz in all_classes if module.__name__ == clz.__module__}
+            module_classes = {name: clz for name, clz in all_classes.items() if module.__name__ == clz.__module__}
 
             if not parent_clz_name:
                 _classes.update(module_classes)
