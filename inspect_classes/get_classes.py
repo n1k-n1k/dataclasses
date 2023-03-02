@@ -1,8 +1,5 @@
-import sys
 import inspect
 import importlib.util
-
-from typing import Dict
 
 from pathlib import Path
 
@@ -15,7 +12,10 @@ class Passed:
 
 def get_module_classes(path: str, parent_clz_name: str | None = None):
     _path = Path(path)
-    python_files = [file_path for file_path in _path.glob("**/*") if str(file_path).endswith(".py")]
+    if _path.is_dir():
+        python_files = [file_path for file_path in _path.glob("**/*") if str(file_path).endswith(".py")]
+    else:
+        python_files = [_path]
     _classes = {}
     for file_path in python_files:
         try:
@@ -46,7 +46,8 @@ def get_module_classes(path: str, parent_clz_name: str | None = None):
 if __name__ == '__main__':
     from devtools import debug
 
-    _path = str(Path(__file__).parent)
-    print(_path)
-    debug(get_module_classes(_path, 'ABCSuperPet'))
-    debug(get_module_classes(_path))
+    __path = str(Path(__file__).parent)
+    # __path = str(Path(__file__))
+    print(__path)
+    debug(get_module_classes(__path, 'ABCSuperPet'))
+    debug(get_module_classes(__path))
