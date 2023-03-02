@@ -10,7 +10,17 @@ class Passed:
     pass
 
 
-def get_module_classes(path: str, parent_clz_name: str | None = None):
+def get_module_classes(path: str, parent_clz_name: str | None = None) -> Dict[str, type]:
+    """Получить классы из модуля по пути до него в формате словаря {'ИмяКласса': класс}
+
+    Возможно получение только потомков определённого класса любой глубины вложенности наследования.
+    (реализовано не через issubclasss())
+
+    Args:
+        path (str): путь к модулю, моожет быть директорией или файлом
+        parent_clz_name (str, optional): имя родительского класса
+    """
+    
     _path = Path(path)
     if _path.is_dir():
         python_files = [file_path for file_path in _path.glob("**/*") if str(file_path).endswith(".py")]
