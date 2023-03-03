@@ -32,7 +32,7 @@ class MemoryMockRepository(NewBaseRepository):
         return self._data
 
     def _delete_all(self):
-        self._data = set()
+        self._data = list()
 
     def __str__(self):
         s = "\n".join(f'{i} - {itm}' for i, itm in enumerate(self._data))
