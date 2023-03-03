@@ -1,4 +1,4 @@
-from . import MemoryMockRepository
+from repository.repo import MemoryMockRepository
 
 repo = MemoryMockRepository()
 data = [
